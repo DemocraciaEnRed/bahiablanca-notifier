@@ -22,6 +22,11 @@ var config = {
 	},
 
 	transport: {
+		nodemailer: {
+			service: '',
+			user: '',
+			pass: ''
+		},
 		mandrill: {
 			token: 'Zs6ePWZb9FWJZ6QCMkEBQw',
 			from: {

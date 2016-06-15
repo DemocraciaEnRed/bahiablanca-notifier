@@ -19,6 +19,11 @@ var config = {
 	},
 
 	transport: {
+		nodemailer: {
+			service: '',
+			user: '',
+			pass: ''
+		},
 		mandrill: {
 			token: 'fake-mandrill-api-token'
 		},

@@ -1,4 +1,5 @@
 var mandrill = require('node-mandrill');
+var nodemailer = require('nodemailer');
 var twilio = require('twilio');
 var gcm = require('node-gcm');
 var apn = require('apn');
@@ -160,7 +161,18 @@ var setupIOSPushNotification = function () {
 	}
 };
 
+var setupNodemailer = function () {
+	return nodemailer.createTransport({
+		service: config.transport.nodemailer.service,
+		auth: {
+			user: config.transport.nodemailer.user,
+			pass: config.transport.nodemailer.pass
+		}
+	});
+};
+
 var transport = {
+	nodemailer: setupNodemailer(),
 	mandrill: setupMandrill(),
 	twilio: setupTwilio(),
 	android: setupAndroidPushNotification(),
