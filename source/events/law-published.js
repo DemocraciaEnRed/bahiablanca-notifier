@@ -61,20 +61,13 @@ module.exports = function (notifier) {
         templates.jade('law-published', vars, function (err, content) {
           logger.info('Notifying user ' + user.email);
 
-          transport.mandrill('/messages/send', {
-            message: {
-              auto_html: null,
-              to: [{email: user.email}],
-              preserve_recipients: false,
-              from_email: config.transport.mandrill.from.email,
-              from_name: config.transport.mandrill.from.name,
-              subject: t('templates.law-published.subject'),
-              text: content,
-              html: content,
-              auto_text: true
-            }
+          transport.nodemailer.sendMail({
+            from: config.from,
+            to: user.email,
+            subject: t('templates.law-published.subject'),
+            html: content
           }, function (err) {
-            callback && callback(err);
+            if (callback) callback(err);
           });
         });
     });
