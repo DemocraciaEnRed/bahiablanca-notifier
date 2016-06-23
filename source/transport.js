@@ -162,6 +162,14 @@ var setupIOSPushNotification = function () {
 };
 
 var setupNodemailer = function () {
+	if (!config.transport.nodemailer.service) {
+		return {
+			sendMail: function () {
+				logger.error('Nodemailer transport not configured.')
+			}
+		}
+	}
+
 	return nodemailer.createTransport({
 		service: config.transport.nodemailer.service,
 		auth: {

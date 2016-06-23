@@ -23,7 +23,7 @@ module.exports = function signup(notifier) {
   notifier.resolve('forgot-password', function (action, actions, callback) {
     db.user.findOne({ email: action.user }, function (err, user) {
       if (err) return callback(err);
-      if (!user) return callback({message: 'user not found', email: action.email});
+      if (!user) return callback({message: 'user not found', email: action.user});
 
       var data = {
         email: user.email,
@@ -47,23 +47,14 @@ module.exports = function signup(notifier) {
 
       // Add get content from jade template
       templates.jade('forgot-password', vars, function (err, content) {
-
-        transport.mandrill('/messages/send', {
-            message: {
-              auto_html: null,
-              to: [{email: action.data.email}],
-              preserve_recipients: false,
-              from_email: config.transport.mandrill.from.email,
-              from_name: config.transport.mandrill.from.name,
-              subject: t('templates.forgot-password.subject'),
-              text: content,
-              html: content,
-              auto_text: true
-            }
-          }, function (err) {
-            callback && callback(err);
-          });
-
+        transport.nodemailer.sendMail({
+          from: config.from,
+          to: [{email: action.data.email}],
+          subject: t('templates.forgot-password.subject'),
+          html: content,
+        }, function (err) {
+          if (callback) callback(err);
+        });
       });
   });
 }

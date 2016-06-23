@@ -4,7 +4,7 @@ var config = {
 	port: 9001,
 
 	db: {
-		connection: 'mongodb://localhost/DemocracyOS-dev',
+		connection: 'mongodb://localhost/DemocracyOS-bahiablanca',
 		aliases: {
 			user: 'users'
 		}
@@ -19,6 +19,11 @@ var config = {
 
 	logentries: {
 		token: null
+	},
+
+	from: {
+		name: 'DemocracyOS',
+		address: 'no-reply@democracyos.org'
 	},
 
 	transport: {

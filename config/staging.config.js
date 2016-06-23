@@ -21,6 +21,11 @@ var config = {
 		token: process.env.HOOK_TOKEN
 	},
 
+	from: {
+		name: 'DemocracyOS',
+		address: 'no-reply@democracyos.org'
+	},
+
 	transport: {
 		nodemailer: {
 			service: process.env.NODEMAILER_SERVICE,
