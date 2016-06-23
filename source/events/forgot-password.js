@@ -49,7 +49,7 @@ module.exports = function signup(notifier) {
       templates.jade('forgot-password', vars, function (err, content) {
         transport.nodemailer.sendMail({
           from: config.from,
-          to: [{email: action.data.email}],
+          to: action.data.email,
           subject: t('templates.forgot-password.subject'),
           html: content,
         }, function (err) {
