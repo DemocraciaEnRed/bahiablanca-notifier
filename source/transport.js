@@ -1,24 +1,9 @@
-var mandrill = require('node-mandrill');
 var nodemailer = require('nodemailer');
 var twilio = require('twilio');
 var gcm = require('node-gcm');
 var apn = require('apn');
 var logger = require('./utils/logger');
 var config = require('../config');
-
-var setupMandrill = function () {
-	if (!validConfig()) {
-		var errorMsg = 'missing mandrill token, please update config.transport.mandrill section';
-		logger.error(errorMsg);
-		throw new Error(errorMsg);
-	}
-
-	return mandrill(config.transport.mandrill.token);
-
-	function validConfig() {
-		return config.transport.mandrill && config.transport.mandrill.token;
-	}
-};
 
 var setupTwilio = function () {
 	if (!validConfig()) {
@@ -181,7 +166,6 @@ var setupNodemailer = function () {
 
 var transport = {
 	nodemailer: setupNodemailer(),
-	mandrill: setupMandrill(),
 	twilio: setupTwilio(),
 	android: setupAndroidPushNotification(),
 	ios: setupIOSPushNotification()

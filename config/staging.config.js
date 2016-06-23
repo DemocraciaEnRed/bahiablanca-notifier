@@ -32,13 +32,6 @@ var config = {
 			user: process.env.NODEMAILER_USER,
 			pass: process.env.NODEMAILER_PASS
 		},
-		mandrill: {
-			token: process.env.MANDRILL_TOKEN,
-			from: {
-				email: process.env.MANDRILL_FROM_EMAIL,
-				name: process.env.MANDRILL_FROM_NAME
-			}
-		},
 		twilio : {
 			accountSid: process.env.TWILIO_ACCOUNT_SID,
 			authToken: process.env.TWILIO_ACCOUNT_TOKEN
