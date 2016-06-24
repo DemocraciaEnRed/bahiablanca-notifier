@@ -69,22 +69,14 @@ module.exports = function (notifier) {
 
         // Add get content from jade template
         templates.jade('reply-argument', vars, function (err, content) {
-
-          transport.mandrill('/messages/send', {
-              message: {
-                auto_html: null,
-                to: [{email: action.data.author.email}],
-                preserve_recipients: false,
-                from_email: config.transport.mandrill.from.email,
-                from_name: config.transport.mandrill.from.name,
-                subject: t('templates.reply-argument.subject'),
-                text: content,
-                html: content,
-                auto_text: true
-              }
-            }, function (err) {
-              callback && callback(err);
-            });
+          transport.nodemailer.sendMail({
+            from: config.from,
+            to: action.data.author.email,
+            subject: t('templates.reply-argument.subject'),
+            html: content,
+          }, function (err) {
+            if (callback) callback(err);
+          });
         });
     });
 }

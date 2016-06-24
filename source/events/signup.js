@@ -51,28 +51,17 @@ module.exports = function signup(notifier) {
 
       // Add get content from jade template
       templates.jade('welcome-email', vars, function (err, content) {
-
-        transport.mandrill('/messages/send', {
-            message: {
-              auto_html: null,
-              to: [{email: action.data.email}],
-              preserve_recipients: false,
-              from_email: config.transport.mandrill.from.email,
-              from_name: config.transport.mandrill.from.name,
-              subject: t('templates.welcome-email.subject'),
-              text: content,
-              html: content,
-              auto_text: true
-            }
-          }, function (err) {
-            callback && callback(err);
-          });
-
+        transport.nodemailer.sendMail({
+          from: config.from,
+          to: action.data.email,
+          subject: t('templates.welcome-email.subject'),
+          html: content,
+        }, function (err) {
+          if (callback) callback(err);
+        });
       });
   });
 }
-
-
 
 function formatName (user) {
   return user.lastName ? user.firstName + ' ' + user.lastName : user.firstName
