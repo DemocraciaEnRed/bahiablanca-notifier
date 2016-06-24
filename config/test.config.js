@@ -18,7 +18,17 @@ var config = {
 		token: 'fake-hook-token'
 	},
 
+	from: {
+		name: 'DemocracyOS',
+		address: 'no-reply@democracyos.org'
+	},
+
 	transport: {
+		nodemailer: {
+			service: '',
+			user: '',
+			pass: ''
+		},
 		mandrill: {
 			token: 'fake-mandrill-api-token'
 		},
