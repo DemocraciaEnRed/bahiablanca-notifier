@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var notifier = require('./source/notifier');
 var config = require('./config');
 
