@@ -166,9 +166,9 @@ var setupNodemailer = function () {
 
 var transport = {
 	nodemailer: setupNodemailer(),
-	twilio: setupTwilio(),
-	android: setupAndroidPushNotification(),
-	ios: setupIOSPushNotification()
+	// twilio: setupTwilio(),
+	// android: setupAndroidPushNotification(),
+	// ios: setupIOSPushNotification()
 };
 
 module.exports = transport;
